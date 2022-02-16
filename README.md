@@ -7,4 +7,4 @@
 日本語バージョンも準備しております。
 
 - [개요](./JPA.md)
-- [영속성](./Persistance.md)
+- [영속성](./Persistence.md)

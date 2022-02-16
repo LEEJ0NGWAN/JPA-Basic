@@ -74,7 +74,7 @@ m1 == m2; // true: SQL을 한번한 실행
 
 ### 트랜잭션을 지원하는 쓰기 지연(버퍼링)
 
-1. 트랜잭션 커밋까지 Persistance Context에서 SQL 누적함(일종의 버퍼링)
+1. 트랜잭션 커밋까지 Persistence Context에서 SQL 누적함(일종의 버퍼링)
 2. JDBC BATCH SQL 기능으로 한번에 SQL 전송(flush)
 
 ```java

@@ -2,7 +2,7 @@
 
 # 영속성 관리
 
-# Persistance Context
+# Persistence Context
 
 엔티티를 영구저장하기 위한 환경
 
@@ -51,7 +51,7 @@ em.persist(member);
 
 삭제된 상태
 
-# Persistance Context 장점
+# Persistence Context 장점
 
 ### 1차 캐시
 
@@ -127,8 +127,8 @@ hibernate.jdbc.batch_size
 
 ### 주의 사항
 
-- Persistance Context를 비우지 않음
-- Persistance Context 변경 사항을 DB 동기화
+- Persistence Context를 비우지 않음
+- Persistence Context 변경 사항을 DB 동기화
 - 트랜잭션 작업 단위가 중요함 → 커밋 직전에만 동기화 하면 됨
 
 # 준영속 상태

@@ -9,4 +9,5 @@
 - [개요](./JPA.md)
 - [영속성](./Persistence.md)
 - [엔티티 맵핑](./EntityMapping.md)
+- [기본키 맵핑](./PKMapping.md)
 

@@ -10,4 +10,4 @@
 - [영속성](./Persistence.md)
 - [엔티티 맵핑](./EntityMapping.md)
 - [기본키 맵핑](./PKMapping.md)
-
+- [연관관계 맵핑 기초](./MappingBasic.md)

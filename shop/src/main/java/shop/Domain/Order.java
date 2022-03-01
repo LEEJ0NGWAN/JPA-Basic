@@ -2,6 +2,8 @@ package shop.Domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "`ORDER`")
 public class Order {
@@ -17,6 +19,9 @@ public class Order {
     private LocalDateTime orderDate;
     private String status;
 
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems = new ArrayList<>();
+
     public Order() {}
     public Order(Long id, Member member, LocalDateTime orderDate, String status) {
         this.id = id;
@@ -24,6 +29,10 @@ public class Order {
         this.orderDate = orderDate;
         this.status = status;
     }
+
+    public List<OrderItem> getOrderItems() { return orderItems; }
+
+    public void setOrderItems(List<OrderItem> orderItems) { this.orderItems = orderItems; }
 
     public Long getId() {
         return id;

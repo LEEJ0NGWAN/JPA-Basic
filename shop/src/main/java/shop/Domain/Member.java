@@ -3,6 +3,9 @@ package shop.Domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -16,6 +19,9 @@ public class Member {
     private String street;
     private String zipcode;
 
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
+
     public Member() {}
     public Member(Long id, String name, String city, String street, String zipcode) {
         this.id = id;
@@ -23,6 +29,14 @@ public class Member {
         this.city = city;
         this.street = street;
         this.zipcode = zipcode;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public Long getId() {

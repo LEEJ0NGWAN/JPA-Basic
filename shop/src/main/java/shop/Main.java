@@ -67,6 +67,23 @@ public class Main {
 
             tx.commit();
 
+            em.clear();
+
+            em.find(Order.class, order.getId())
+                    .getMember()
+                    .getOrders()
+                    .forEach(o -> System.out.println(o.getId()));
+
+            em.find(OrderItem.class, orderCheese.getId())
+                    .getItem()
+                    .getOrderItems()
+                    .forEach(o -> System.out.println(o.getId()));
+
+            em.find(OrderItem.class, orderSnack.getId())
+                    .getOrder()
+                    .getOrderItems()
+                    .forEach(o -> System.out.println(o.getId()));
+
         } catch (Exception e) {
 
             e.printStackTrace();

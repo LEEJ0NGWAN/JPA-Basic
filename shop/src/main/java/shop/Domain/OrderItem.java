@@ -1,8 +1,16 @@
 package shop.Domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderItem {
 
     @Id @GeneratedValue
@@ -20,53 +28,4 @@ public class OrderItem {
     private Integer orderPrice;
 
     private Integer count;
-
-    public OrderItem() {}
-    public OrderItem(Long id, Order order, Item item, Integer orderPrice, Integer count) {
-        this.id = id;
-        this.order = order;
-        this.item = item;
-        this.orderPrice = orderPrice;
-        this.count = count;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public Integer getOrderPrice() {
-        return orderPrice;
-    }
-
-    public void setOrderPrice(Integer orderPrice) {
-        this.orderPrice = orderPrice;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
 }

@@ -13,21 +13,20 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class Category {
 
     @Id @GeneratedValue
     private Long id;
 
     private String name;
-    private Integer price;
 
-    @Column(name = "stock_quantity")
-    private Integer stockQuantity;
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Category parent;
 
-    @OneToMany(mappedBy = "item")
-    private List<OrderItem> orderItems = new ArrayList<>();
+    @OneToMany(mappedBy = "parent")
+    private List<Category> child = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "ITEM_CATEGORY")
-    private List<Category> categories = new ArrayList<>();
+    @ManyToMany(mappedBy = "categories")
+    private List<Item> items = new ArrayList<>();
 }

@@ -1,9 +1,6 @@
 package shop;
 
-import shop.Domain.Item;
-import shop.Domain.Member;
-import shop.Domain.Order;
-import shop.Domain.OrderItem;
+import shop.Domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -31,20 +28,32 @@ public class Main {
             memberA.setStreet("Yeongdeungpo-ro");
             memberA.setZipcode("XXXXXX");
 
+            Category category = new Category();
+            category.setName("food");
+
             Item cheese = new Item();
             cheese.setName("cheese");
             cheese.setPrice(1500);
             cheese.setStockQuantity(3);
+            cheese.getCategories().add(category);
 
             Item snack = new Item();
             snack.setName("potato chip");
             snack.setPrice(2000);
             snack.setStockQuantity(5);
+            snack.getCategories().add(category);
+
+            Delivery delivery = new Delivery();
+            delivery.setStatus("prepare");
+            delivery.setCity("Seoul");
+            delivery.setStreet("Jong-ro");
+            delivery.setZipcode("XXXXXX");
 
             Order order = new Order();
             order.setOrderDate(LocalDateTime.now());
             order.setMember(memberA);
             order.setStatus("delivering");
+            order.setDelivery(delivery);
 
             OrderItem orderCheese = new OrderItem();
             orderCheese.setOrder(order);
@@ -59,6 +68,8 @@ public class Main {
             orderSnack.setCount(10);
 
             em.persist(memberA);
+            em.persist(category);
+            em.persist(delivery);
             em.persist(order);
             em.persist(cheese);
             em.persist(snack);
@@ -83,6 +94,13 @@ public class Main {
                     .getOrder()
                     .getOrderItems()
                     .forEach(o -> System.out.println(o.getId()));
+
+            System.out.println(
+                    em.find(Delivery.class, delivery.getId()).getOrder().getId());
+
+            em.find(Category.class, category.getId())
+                    .getItems()
+                    .forEach(o -> System.out.println(o.getName()));
 
         } catch (Exception e) {
 

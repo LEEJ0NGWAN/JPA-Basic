@@ -1,8 +1,12 @@
 package ManyToOne;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter @Setter
 public class Many {
 
     @Id @GeneratedValue
@@ -13,28 +17,4 @@ public class Many {
     @ManyToOne
     @JoinColumn(name = "one_id")
     private One one;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public One getOne() {
-        return one;
-    }
-
-    public void setOne(One one) {
-        this.one = one;
-    }
 }

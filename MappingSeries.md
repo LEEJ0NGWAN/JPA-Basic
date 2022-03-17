@@ -1,5 +1,7 @@
 [돌아가기](https://github.com/LEEJ0NGWAN/JPA-Basic)
 
+# 다양한 연관관계 매핑
+
 # 매핑 시 고려사항
 
 ### 다중성
@@ -170,6 +172,20 @@ RDB에서는 정규화 된 테이블 2개를 직접 다대다 관계로 표현�
 
 주인 객체 쪽 참조 변수에 @JoinTable을 붙여 연결 테이블을 생성하는 것에 주의한다
 
+### @JoinTable
+
+연결 테이블을 자동 생성해주는 애노테이션
+
+3가지 속성이 있다
+
+- name: String → 연결 테이블의 이름을 설정
+- joinColumns: @JoinColumn → 연결 테이블의 주인 객체의 키를 설정
+- inverseJoinColumns: @JoinColumn → 연결 테이블의 비주인 객체의 키를 설정
+
+joinColumns, inverseJoinColumns 속성을 설정하지 않을 경우,
+
+각 객체에 포함된 `참조 변수의 이름 + _id` 의 형태로 외래키 칼럼명이 설정된다
+
 ### 주인객체
 
 ```java
@@ -182,7 +198,10 @@ public class Member {
 	private String name;
 
 	@ManyToMany
-	@JoinTable(name = "member_product")
+	@JoinTable(
+		name = "member_product", 
+		joinColumns = @JoinColumn(name = "member_id"),
+		inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private List<Product> products = new ArrayList<>();
 
 	// getter & setter
@@ -216,56 +235,3 @@ public class Product {
 다대다 관계의 경우 연결 테이블을 엔티티로 승격시켜 하나의 객체로써 다룬다
 
 즉, @ManyToMany → @OneToMany + @ManyToOne 로 쪼갠다
-
-```java
-@Entity
-public class Member {
-
-	@Id @GeneratedValue
-	private Long id;
-
-	private String name;
-
-	@OneToMany(mappedBy = "member")
-	private MemberProduct memberProduct;
-
-	// getter & setter
-}
-```
-
-```java
-@Entity
-public class Product {
-
-	@Id @GeneratedValue
-	private Long id;
-
-	private String name;
-
-	@OneToMany(mappedBy = "product")
-	private MemberProduct memberProduct;
-
-	// getter & setter
-}
-```
-
-```java
-@Entity
-public class MemberProduct {
-
-	@Id @GeneratedValue
-	private Long id;
-
-	...
-
-	@ManyToOne
-	@JoinColumn(name = "member_id")
-	private Member member;
-
-	@ManyToOne
-	@JoinColumn(name = "product_id")
-	private Product product;
-
-	// getter & setter
-}
-```

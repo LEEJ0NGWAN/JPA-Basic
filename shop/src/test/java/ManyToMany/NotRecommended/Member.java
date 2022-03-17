@@ -17,6 +17,9 @@ public class Member {
     private String name;
 
     @ManyToMany
-    @JoinTable(name = "member_product")
+    @JoinTable(
+            name = "member_product",
+            joinColumns = @JoinColumn(name = "member_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products = new ArrayList<>();
 }
